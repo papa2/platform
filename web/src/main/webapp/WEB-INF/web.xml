@@ -15,6 +15,7 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
 			classpath*:bean/spring*.xml
+			classpath*:cxf/cxf*.xml
 			<!-- classpath:dubbo/dubbo*.xml -->
 		</param-value>
 	</context-param>
@@ -64,6 +65,16 @@
 	<listener>
 		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
 	</listener>
+	
+	<servlet>
+		<servlet-name>cxf</servlet-name>
+		<servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>cxf</servlet-name>
+		<url-pattern>/router/*</url-pattern>
+	</servlet-mapping>
 
 	<error-page>
 		<error-code>404</error-code>

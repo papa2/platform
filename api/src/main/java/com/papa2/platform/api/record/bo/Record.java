@@ -32,6 +32,8 @@ public class Record {
 	 */
 	private String carNo;
 
+	private String modifyUser;
+
 	public String getId() {
 		return id;
 	}
@@ -78,6 +80,14 @@ public class Record {
 
 	public void setCarNo(String carNo) {
 		this.carNo = carNo;
+	}
+
+	public String getModifyUser() {
+		return modifyUser;
+	}
+
+	public void setModifyUser(String modifyUser) {
+		this.modifyUser = modifyUser;
 	}
 
 }

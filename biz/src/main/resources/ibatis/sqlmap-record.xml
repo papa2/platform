@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="record">
+	
+	<typeAlias alias="record" type="com.papa2.platform.api.record.bo.Record" />
+	
+	<insert id="createRecord" parameterClass="record">
+	<![CDATA[
+		INSERT
+		INTO boss_tb_park_record
+		  (
+		    PARK_ID,
+		    START_TIME,
+		    END_TIME,
+		    PARK_CARD_ID,
+		    CAR_NO,
+		    STATE,
+		    CREATE_DATE,
+		    MODIFY_DATE,
+		    MODIFY_USER
+		  )
+		  VALUES
+		  (
+		    #parkId#,
+		    STR_TO_DATE(#startTime#, '%m/%d/%Y'),
+		    STR_TO_DATE(#endTime#, '%m/%d/%Y'),
+		    #parkCardId#,
+		    #carNo#,
+		   	'U',
+		   	CURDATE(),
+		    CURDATE(),
+		    #modifyUser#
+		  )
+	]]>
+	</insert>
+	
+</sqlMap>
