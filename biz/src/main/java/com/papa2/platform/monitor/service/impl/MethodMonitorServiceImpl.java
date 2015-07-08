@@ -62,7 +62,7 @@ public class MethodMonitorServiceImpl implements IMethodMonitorService {
 		}
 
 		try {
-			String result = methodMonitorDao.createMethodMonitor(methodMonitor);
+			String result = String.valueOf(methodMonitorDao.createMethodMonitor(methodMonitor));
 			res.setCode(result);
 			res.setResult(true);
 		} catch (Exception e) {

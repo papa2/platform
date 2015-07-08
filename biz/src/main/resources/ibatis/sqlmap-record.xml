@@ -11,29 +11,34 @@
 		INSERT
 		INTO boss_tb_park_record
 		  (
-		    PARK_ID,
-		    START_TIME,
-		    END_TIME,
-		    PARK_CARD_ID,
-		    CAR_NO,
-		    STATE,
-		    CREATE_DATE,
-		    MODIFY_DATE,
-		    MODIFY_USER
+			PARK_ID,
+			START_TIME,
+			END_TIME,
+			PARK_CARD_ID,
+			CAR_NO,
+			STATE,
+			CREATE_DATE,
+			MODIFY_DATE,
+			MODIFY_USER
 		  )
 		  VALUES
 		  (
-		    #parkId#,
-		    STR_TO_DATE(#startTime#, '%Y-%m-%d %T'),
-		    STR_TO_DATE(#endTime#, '%Y-%m-%d %T'),
-		    #parkCardId#,
-		    #carNo#,
-		   	'U',
-		   	NOW(),
-		    NOW(),
-		    #modifyUser#
+			#parkId#,
+			STR_TO_DATE(#startTime#, '%Y-%m-%d %T'),
+			STR_TO_DATE(#endTime#, '%Y-%m-%d %T'),
+			#parkCardId#,
+			#carNo#,
+			'U',
+			NOW(),
+			NOW(),
+			#modifyUser#
 		  )
 	]]>
+		<selectKey resultClass="java.lang.Long" keyProperty="id">
+		<![CDATA[
+			SELECT LAST_INSERT_ID()
+		]]>
+		</selectKey>
 	</insert>
 	
 </sqlMap>

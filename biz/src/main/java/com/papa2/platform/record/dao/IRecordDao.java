@@ -12,7 +12,7 @@ public interface IRecordDao {
 	 * @param record
 	 * @return
 	 */
-	String createRecord(Record record);
+	Long createRecord(Record record);
 
 	/**
 	 * 

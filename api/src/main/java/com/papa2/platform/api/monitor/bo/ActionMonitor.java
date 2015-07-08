@@ -12,7 +12,7 @@ public class ActionMonitor extends SearchInfo {
 
 	private static final long serialVersionUID = -3083445126172800213L;
 
-	private String id;
+	private Long id;
 
 	private String userId;
 
@@ -26,11 +26,11 @@ public class ActionMonitor extends SearchInfo {
 
 	private String ip;
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

@@ -14,7 +14,7 @@ public class MethodMonitor extends SearchInfo {
 
 	private static final long serialVersionUID = 492567288192413221L;
 
-	private String id;
+	private Long id;
 
 	private String className;
 
@@ -27,11 +27,11 @@ public class MethodMonitor extends SearchInfo {
 
 	private Date createDate;
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

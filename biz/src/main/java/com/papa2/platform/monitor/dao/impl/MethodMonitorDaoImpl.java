@@ -27,8 +27,8 @@ public class MethodMonitorDaoImpl extends BaseDaoImpl implements IMethodMonitorD
 	}
 
 	@Override
-	public String createMethodMonitor(MethodMonitor methodMonitor) {
-		return (String) getSqlMapClientTemplate().insert("monitor.method.createMethodMonitor", methodMonitor);
+	public Long createMethodMonitor(MethodMonitor methodMonitor) {
+		return (Long) getSqlMapClientTemplate().insert("monitor.method.createMethodMonitor", methodMonitor);
 	}
 
 }

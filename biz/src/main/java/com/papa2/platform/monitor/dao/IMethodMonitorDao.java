@@ -32,6 +32,6 @@ public interface IMethodMonitorDao {
 	 * @param methodMonitor
 	 * @return
 	 */
-	String createMethodMonitor(MethodMonitor methodMonitor);
+	Long createMethodMonitor(MethodMonitor methodMonitor);
 
 }

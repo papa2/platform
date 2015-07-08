@@ -8,7 +8,7 @@ package com.papa2.platform.api.record.bo;
  */
 public class Record {
 
-	private String id;
+	private Long id;
 
 	private String parkId;
 
@@ -34,11 +34,11 @@ public class Record {
 
 	private String modifyUser;
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

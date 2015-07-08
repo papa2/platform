@@ -56,7 +56,7 @@ public class RecordServiceImpl implements IRecordService {
 		record.setModifyUser(serialNo);
 
 		try {
-			result.setCode(recordDao.createRecord(record));
+			result.setCode(String.valueOf(recordDao.createRecord(record)));
 			result.setResult(true);
 		} catch (Exception e) {
 			logger.error(LogUtil.parserBean(record), e);

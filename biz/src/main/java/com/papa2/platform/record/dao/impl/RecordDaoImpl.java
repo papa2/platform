@@ -18,8 +18,8 @@ import com.papa2.platform.record.dao.IRecordDao;
 public class RecordDaoImpl extends BaseDaoImpl implements IRecordDao {
 
 	@Override
-	public String createRecord(Record record) {
-		return (String) getSqlMapClientTemplate().insert("record.createRecord", record);
+	public Long createRecord(Record record) {
+		return (Long) getSqlMapClientTemplate().insert("record.createRecord", record);
 	}
 
 	@Override
