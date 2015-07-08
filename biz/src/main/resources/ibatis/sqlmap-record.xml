@@ -24,13 +24,13 @@
 		  VALUES
 		  (
 		    #parkId#,
-		    STR_TO_DATE(#startTime#, '%m/%d/%Y'),
-		    STR_TO_DATE(#endTime#, '%m/%d/%Y'),
+		    STR_TO_DATE(#startTime#, '%Y-%m-%d %T'),
+		    STR_TO_DATE(#endTime#, '%Y-%m-%d %T'),
 		    #parkCardId#,
 		    #carNo#,
 		   	'U',
-		   	CURDATE(),
-		    CURDATE(),
+		   	NOW(),
+		    NOW(),
 		    #modifyUser#
 		  )
 	]]>

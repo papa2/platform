@@ -43,14 +43,16 @@ public class RecordServiceImpl implements IRecordService {
 		}
 
 		record.setStartTime(startTime.trim());
+		record.setEndTime(endTime);
 
 		if (StringUtils.isBlank(parkCardNo) && StringUtils.isBlank(carNo)) {
 			result.setCode("停车卡和车牌不能同时为空。");
 			return result;
 		}
 
-		record.setParkId(parkCardNo);
+		record.setParkCardId(parkCardNo);
 		record.setCarNo(carNo);
+
 		record.setModifyUser(serialNo);
 
 		try {

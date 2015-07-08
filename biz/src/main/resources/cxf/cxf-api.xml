@@ -17,7 +17,7 @@
 
 	<!-- JAX-RS -->
 	
-	<jaxrs:server id="recordService-rs" address="/record">
+	<jaxrs:server id="recordService-rs" address="/">
 		<jaxrs:serviceBeans>
 			<ref bean="recordService" />
 		</jaxrs:serviceBeans>
