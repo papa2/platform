@@ -34,6 +34,13 @@ public class Record {
 
 	private String modifyUser;
 
+	// >>>>>>>>>>以下是辅助属性<<<<<<<<<<
+
+	/**
+	 * 停车卡信息.
+	 */
+	private String parkCardNo;
+
 	public Long getId() {
 		return id;
 	}
@@ -88,6 +95,14 @@ public class Record {
 
 	public void setModifyUser(String modifyUser) {
 		this.modifyUser = modifyUser;
+	}
+
+	public String getParkCardNo() {
+		return parkCardNo;
+	}
+
+	public void setParkCardNo(String parkCardNo) {
+		this.parkCardNo = parkCardNo;
 	}
 
 }

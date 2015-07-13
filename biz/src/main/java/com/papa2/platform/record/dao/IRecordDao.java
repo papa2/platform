@@ -7,6 +7,13 @@ import com.papa2.platform.api.record.bo.Record;
 public interface IRecordDao {
 
 	/**
+	 * 
+	 * @param record
+	 * @return
+	 */
+	int updateRecord(Record record);
+
+	/**
 	 * 记录停车信息.
 	 * 
 	 * @param record

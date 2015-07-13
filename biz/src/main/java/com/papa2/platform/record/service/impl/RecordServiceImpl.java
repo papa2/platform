@@ -1,5 +1,7 @@
 package com.papa2.platform.record.service.impl;
 
+import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
 
 import com.alibaba.fastjson.JSON;
@@ -56,10 +58,26 @@ public class RecordServiceImpl implements IRecordService {
 		record.setModifyUser(serialNo);
 
 		try {
+			int count = recordDao.updateRecord(record);
+			if (count > 0) {
+				result.setCode("更新停车信息成功。");
+				result.setResult(true);
+				return result;
+			}
+		} catch (Exception e) {
+			logger.error(LogUtil.parserBean(record), e);
+
+			result.setCode("更新停车信息失败。");
+			return result;
+		}
+
+		try {
 			result.setCode(String.valueOf(recordDao.createRecord(record)));
 			result.setResult(true);
 		} catch (Exception e) {
 			logger.error(LogUtil.parserBean(record), e);
+
+			result.setCode("记录停车信息失败。");
 		}
 
 		return result;
@@ -80,14 +98,34 @@ public class RecordServiceImpl implements IRecordService {
 			return result;
 		}
 
+		List<Record> records = null;
 		try {
-			result.setCode(String.valueOf(recordDao.createRecord(serialNo.trim(),
-				JSON.parseArray(recordList, Record.class), serialNo)));
-			result.setResult(true);
+			records = JSON.parseArray(recordList, Record.class);
 		} catch (Exception e) {
-			logger.error("serialNo:" + serialNo + LogUtil.parserBean(recordList), e);
+			logger.error(recordList, e);
+
+			result.setCode("停车信息反序列化失败。");
+			return result;
 		}
 
+		if (records == null || records.size() == 0) {
+			result.setCode("停车信息不能为空。");
+			return result;
+		}
+
+		result.setResult(true);
+
+		BooleanResult res = null;
+		int count = 0;
+		for (Record record : records) {
+			res =
+				record(serialNo, record.getStartTime(), record.getEndTime(), record.getParkCardNo(), record.getCarNo());
+			if (res.getResult()) {
+				count++;
+			}
+		}
+
+		result.setCode("停车信息，成功同步 " + count + "；" + "失败 " + (records.size() - count) + "。");
 		return result;
 	}
 

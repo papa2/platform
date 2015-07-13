@@ -6,6 +6,21 @@
 	
 	<typeAlias alias="record" type="com.papa2.platform.api.record.bo.Record" />
 	
+	<update id="updateRecord" parameterClass="record">
+	<![CDATA[
+		UPDATE boss_tb_park_record t
+		SET t.MODIFY_DATE  = NOW(),
+		  t.MODIFY_USER    = #modifyUser#,
+		  t.END_TIME       = STR_TO_DATE(#endTime#, '%Y-%m-%d %T')
+		WHERE t.PARK_ID    = #parkId#
+		AND t.START_TIME   = STR_TO_DATE(#startTime#, '%Y-%m-%d %T')
+		AND t.PARK_CARD_ID = #parkCardId#
+		AND t.CAR_NO       = #carNo#
+		AND t.STATE        = 'U'
+	]]>
+	</update>
+
+	
 	<insert id="createRecord" parameterClass="record">
 	<![CDATA[
 		INSERT
