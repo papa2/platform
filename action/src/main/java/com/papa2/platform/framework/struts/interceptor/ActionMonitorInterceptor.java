@@ -1,4 +1,4 @@
-package com.papa2.platform.framework.webwork.interceptor;
+package com.papa2.platform.framework.struts.interceptor;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -8,11 +8,11 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.struts2.ServletActionContext;
 
-import com.opensymphony.webwork.ServletActionContext;
-import com.opensymphony.xwork.ActionContext;
-import com.opensymphony.xwork.ActionInvocation;
-import com.opensymphony.xwork.interceptor.Interceptor;
+import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.ActionInvocation;
+import com.opensymphony.xwork2.interceptor.Interceptor;
 import com.papa2.platform.api.cache.IMemcachedCacheService;
 import com.papa2.platform.api.monitor.bo.ActionMonitor;
 import com.papa2.platform.api.user.bo.User;
