@@ -38,6 +38,11 @@
 		<url-pattern>*.htm</url-pattern>
 	</filter-mapping>
 	
+	<filter-mapping>
+		<filter-name>encoding</filter-name>
+		<url-pattern>/router/*</url-pattern>
+	</filter-mapping>
+	
 	<filter>
 		<filter-name>SessionFilter</filter-name>
 		<filter-class>com.papa2.platform.framework.web.filter.SessionFilter</filter-class>
