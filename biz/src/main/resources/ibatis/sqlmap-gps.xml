@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="gps">
+	
+	<typeAlias alias="coordinate" type="com.papa2.platform.api.gps.bo.Coordinate" />
+	
+	<select id="getCoordinate" parameterClass="coordinate" resultClass="coordinate">
+	<![CDATA[
+		SELECT t.offset_x AS offsetX,
+			   t.offset_y AS offsetY
+		  FROM basis_tb_gmap_offset t
+		 WHERE t.lat_int= #lat#
+		   AND t.lon_int= #lon#
+	]]>
+	</select>
+	
+</sqlMap>

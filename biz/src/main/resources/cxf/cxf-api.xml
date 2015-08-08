@@ -17,9 +17,9 @@
 
 	<!-- JAX-RS -->
 	
-	<jaxrs:server id="recordService-rs" address="/">
+	<jaxrs:server id="gpsService-rs" address="/maps">
 		<jaxrs:serviceBeans>
-			<ref bean="recordService" />
+			<ref bean="gpsService" />
 		</jaxrs:serviceBeans>
 	</jaxrs:server>
 	
