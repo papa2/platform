@@ -17,10 +17,17 @@
 
 	<!-- JAX-RS -->
 	
+	<bean id="jsonProvider" class="org.apache.cxf.jaxrs.provider.json.JSONProvider">  
+		<property name="dropRootElement" value="true"/>  
+	</bean>
+	
 	<jaxrs:server id="gpsService-rs" address="/maps">
 		<jaxrs:serviceBeans>
 			<ref bean="gpsService" />
 		</jaxrs:serviceBeans>
+		<jaxrs:providers>  
+			<ref bean="jsonProvider"/>  
+		</jaxrs:providers>  
 	</jaxrs:server>
 	
 </beans>
