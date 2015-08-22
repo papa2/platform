@@ -26,18 +26,19 @@ public class RecordServiceImpl implements IRecordService {
 	private IRecordDao recordDao;
 
 	@Override
-	public BooleanResult record(String serialNo, String startTime, String endTime, String parkCardNo, String carNo) {
+	public BooleanResult record(String parkCode, String startTime, String endTime, String cardNo, String carNo,
+		String timestamp, String signature) {
 		BooleanResult result = new BooleanResult();
 		result.setResult(false);
 
 		Record record = new Record();
 
-		if (StringUtils.isBlank(serialNo)) {
+		if (StringUtils.isBlank(parkCode)) {
 			result.setCode("终端序列号不能为空。");
 			return result;
 		}
 
-		record.setParkId(serialNo.trim());
+		record.setParkCode(parkCode.trim());
 
 		if (StringUtils.isBlank(startTime)) {
 			result.setCode("停车开始时间不能为空。");
@@ -47,15 +48,15 @@ public class RecordServiceImpl implements IRecordService {
 		record.setStartTime(startTime.trim());
 		record.setEndTime(endTime);
 
-		if (StringUtils.isBlank(parkCardNo) && StringUtils.isBlank(carNo)) {
+		if (StringUtils.isBlank(cardNo) && StringUtils.isBlank(carNo)) {
 			result.setCode("停车卡和车牌不能同时为空。");
 			return result;
 		}
 
-		record.setParkCardId(parkCardNo);
+		record.setCardNo(cardNo);
 		record.setCarNo(carNo);
 
-		record.setModifyUser(serialNo);
+		record.setModifyUser(parkCode);
 
 		try {
 			int count = recordDao.updateRecord(record);
@@ -84,14 +85,9 @@ public class RecordServiceImpl implements IRecordService {
 	}
 
 	@Override
-	public BooleanResult record(String serialNo, String recordList) {
+	public BooleanResult record(String parkCode, String recordList, String timestamp, String signature) {
 		BooleanResult result = new BooleanResult();
 		result.setResult(false);
-
-		if (StringUtils.isBlank(serialNo)) {
-			result.setCode("终端序列号不能为空。");
-			return result;
-		}
 
 		if (StringUtils.isBlank(recordList)) {
 			result.setCode("停车信息不能为空。");
@@ -119,7 +115,8 @@ public class RecordServiceImpl implements IRecordService {
 		int count = 0;
 		for (Record record : records) {
 			res =
-				record(serialNo, record.getStartTime(), record.getEndTime(), record.getParkCardNo(), record.getCarNo());
+				record(parkCode, record.getStartTime(), record.getEndTime(), record.getCardNo(), record.getCarNo(),
+					timestamp, signature);
 			if (res.getResult()) {
 				count++;
 			}

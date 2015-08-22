@@ -28,13 +28,13 @@ public class RecordDaoImpl extends BaseDaoImpl implements IRecordDao {
 	}
 
 	@Override
-	public int createRecord(final String serialNo, final List<Record> recordList, final String modifyUser) {
-		return (Integer) getSqlMapClientTemplate().execute(new SqlMapClientCallback() {
-			public Object doInSqlMapClient(SqlMapExecutor executor) throws SQLException {
+	public int createRecord(final String parkCode, final List<Record> recordList, final String modifyUser) {
+		return getSqlMapClientTemplate().execute(new SqlMapClientCallback<Integer>() {
+			public Integer doInSqlMapClient(SqlMapExecutor executor) throws SQLException {
 				int count = 0;
 				executor.startBatch();
 				for (Record record : recordList) {
-					record.setParkId(serialNo);
+					record.setParkCode(parkCode);
 					record.setModifyUser(modifyUser);
 					executor.insert("record.createRecord", record);
 					count++;

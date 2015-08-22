@@ -8,13 +8,13 @@
 	
 	<update id="updateRecord" parameterClass="record">
 	<![CDATA[
-		UPDATE boss_tb_park_record t
+		UPDATE park.boss_tb_park_record t
 		SET t.MODIFY_DATE  = NOW(),
 		  t.MODIFY_USER    = #modifyUser#,
 		  t.END_TIME       = STR_TO_DATE(#endTime#, '%Y-%m-%d %T')
-		WHERE t.PARK_ID    = #parkId#
+		WHERE t.PARK_CODE  = #parkCode#
 		AND t.START_TIME   = STR_TO_DATE(#startTime#, '%Y-%m-%d %T')
-		AND t.PARK_CARD_ID = #parkCardId#
+		AND t.CARD_NO 	   = #cardNo#
 		AND t.CAR_NO       = #carNo#
 		AND t.STATE        = 'U'
 	]]>
@@ -24,32 +24,36 @@
 	<insert id="createRecord" parameterClass="record">
 	<![CDATA[
 		INSERT
-		INTO boss_tb_park_record
+		INTO park.boss_tb_park_record
 		  (
-			PARK_ID,
+			PARK_CODE,
 			START_TIME,
 			END_TIME,
-			PARK_CARD_ID,
+			CARD_NO,
 			CAR_NO,
+			IP,
 			STATE,
 			CREATE_DATE,
+			CREATE_USER,
 			MODIFY_DATE,
 			MODIFY_USER
 		  )
 		  VALUES
 		  (
-			#parkId#,
+			#parkCode#,
 			STR_TO_DATE(#startTime#, '%Y-%m-%d %T'),
 			STR_TO_DATE(#endTime#, '%Y-%m-%d %T'),
 			#parkCardId#,
 			#carNo#,
+			#ip#,
 			'U',
 			NOW(),
+			#modifyUser#,
 			NOW(),
 			#modifyUser#
 		  )
 	]]>
-		<selectKey resultClass="java.lang.Long" keyProperty="id">
+		<selectKey resultClass="java.lang.Long" keyProperty="parkId">
 		<![CDATA[
 			SELECT LAST_INSERT_ID()
 		]]>

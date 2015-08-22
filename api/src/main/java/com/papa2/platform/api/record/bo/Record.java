@@ -10,7 +10,7 @@ public class Record {
 
 	private Long id;
 
-	private String parkId;
+	private String parkCode;
 
 	/**
 	 * 停车开始时间.
@@ -25,21 +25,18 @@ public class Record {
 	/**
 	 * 停车卡信息.
 	 */
-	private String parkCardId;
+	private String cardNo;
 
 	/**
 	 * 车牌信息.
 	 */
 	private String carNo;
 
+	private String ip;
+
 	private String modifyUser;
 
 	// >>>>>>>>>>以下是辅助属性<<<<<<<<<<
-
-	/**
-	 * 停车卡信息.
-	 */
-	private String parkCardNo;
 
 	public Long getId() {
 		return id;
@@ -49,12 +46,12 @@ public class Record {
 		this.id = id;
 	}
 
-	public String getParkId() {
-		return parkId;
+	public String getParkCode() {
+		return parkCode;
 	}
 
-	public void setParkId(String parkId) {
-		this.parkId = parkId;
+	public void setParkCode(String parkCode) {
+		this.parkCode = parkCode;
 	}
 
 	public String getStartTime() {
@@ -73,12 +70,12 @@ public class Record {
 		this.endTime = endTime;
 	}
 
-	public String getParkCardId() {
-		return parkCardId;
+	public String getCardNo() {
+		return cardNo;
 	}
 
-	public void setParkCardId(String parkCardId) {
-		this.parkCardId = parkCardId;
+	public void setCardNo(String cardNo) {
+		this.cardNo = cardNo;
 	}
 
 	public String getCarNo() {
@@ -89,20 +86,20 @@ public class Record {
 		this.carNo = carNo;
 	}
 
+	public String getIp() {
+		return ip;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+
 	public String getModifyUser() {
 		return modifyUser;
 	}
 
 	public void setModifyUser(String modifyUser) {
 		this.modifyUser = modifyUser;
-	}
-
-	public String getParkCardNo() {
-		return parkCardNo;
-	}
-
-	public void setParkCardNo(String parkCardNo) {
-		this.parkCardNo = parkCardNo;
 	}
 
 }
