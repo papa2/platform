@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="park">
+	
+	<typeAlias alias="park" type="com.papa2.platform.api.park.bo.Park" />
+	
+	<select id="getPark" parameterClass="park" resultClass="park">
+	<![CDATA[
+		SELECT t.park_id AS parkId,
+			   t.park_code AS parkCode,
+			   t.park_secret AS parkSecret
+		  FROM park.boss_tb_park t
+		 WHERE t.state = 'U'
+		   AND t.park_code = #parkCode#
+	]]>
+	</select>
+	
+</sqlMap>

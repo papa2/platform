@@ -11,8 +11,8 @@
 		SELECT t.offset_x AS offsetX,
 			   t.offset_y AS offsetY
 		  FROM basis_tb_gmap_offset t
-		 WHERE t.lat_int= #lat#
-		   AND t.lon_int= #lon#
+		 WHERE t.lat_int = #lat#
+		   AND t.lon_int = #lon#
 	]]>
 	</select>
 	

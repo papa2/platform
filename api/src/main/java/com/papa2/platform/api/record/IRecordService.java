@@ -19,36 +19,35 @@ public interface IRecordService {
 	/**
 	 * 
 	 * @param parkCode
+	 * @param timestamp
+	 * @param signature
 	 * @param startTime
 	 * @param endTime
 	 * @param cardNo
 	 * @param carNo
-	 * @param timestamp
-	 * @param signature
 	 * @return
 	 */
 	@POST
 	@Path("/record")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	BooleanResult record(@FormParam("parkCode") String parkCode, @FormParam("startTime") String startTime,
-		@FormParam("endTime") String endTime, @FormParam("cardNo") String cardNo,
-		@FormParam("carNo") String carNo, @FormParam("timestamp") String timestamp,
-		@FormParam("signature") String signature);
+	BooleanResult record(@FormParam("parkCode") String parkCode, @FormParam("timestamp") String timestamp,
+		@FormParam("signature") String signature, @FormParam("startTime") String startTime,
+		@FormParam("endTime") String endTime, @FormParam("cardNo") String cardNo, @FormParam("carNo") String carNo);
 
 	/**
 	 * 
 	 * @param parkCode
-	 * @param recordList
 	 * @param timestamp
 	 * @param signature
+	 * @param recordList
 	 * @return
 	 */
 	@POST
 	@Path("/recordAll")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	BooleanResult record(@FormParam("parkCode") String parkCode, @FormParam("recordList") String recordList,
-		@FormParam("timestamp") String timestamp, @FormParam("signature") String signature);
+	BooleanResult record(@FormParam("parkCode") String parkCode, @FormParam("timestamp") String timestamp,
+		@FormParam("signature") String signature, @FormParam("recordList") String recordList);
 
 }

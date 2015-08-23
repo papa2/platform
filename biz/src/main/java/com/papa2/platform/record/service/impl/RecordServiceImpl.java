@@ -1,15 +1,22 @@
 package com.papa2.platform.record.service.impl;
 
+import java.io.IOException;
 import java.util.List;
 
+import javax.ws.rs.core.Context;
+
 import org.apache.commons.lang.StringUtils;
+import org.apache.cxf.jaxrs.ext.MessageContext;
 
 import com.alibaba.fastjson.JSON;
+import com.papa2.platform.api.park.IParkService;
+import com.papa2.platform.api.park.bo.Park;
 import com.papa2.platform.api.record.IRecordService;
 import com.papa2.platform.api.record.bo.Record;
 import com.papa2.platform.framework.bo.BooleanResult;
 import com.papa2.platform.framework.log.Logger4jCollection;
 import com.papa2.platform.framework.log.Logger4jExtend;
+import com.papa2.platform.framework.util.EncryptUtil;
 import com.papa2.platform.framework.util.LogUtil;
 import com.papa2.platform.record.dao.IRecordDao;
 
@@ -23,22 +30,83 @@ public class RecordServiceImpl implements IRecordService {
 
 	private Logger4jExtend logger = Logger4jCollection.getLogger(RecordServiceImpl.class);
 
+	@Context
+	private MessageContext context;
+
+	private IParkService parkService;
+
 	private IRecordDao recordDao;
 
+	private BooleanResult validate(String parkCode, String timestamp, String signature) {
+		BooleanResult result = new BooleanResult();
+		result.setResult(false);
+
+		if (StringUtils.isBlank(parkCode)) {
+			result.setCode("停车场编号不能为空。");
+			return result;
+		}
+
+		if (StringUtils.isBlank(timestamp)) {
+			result.setCode("时间戳不能为空。");
+			return result;
+		}
+
+		if (StringUtils.isBlank(signature)) {
+			result.setCode("签名不能为空。");
+			return result;
+		}
+
+		Park park = parkService.getPark(parkCode.trim());
+
+		if (park == null) {
+			result.setCode("停车场信息不存在。");
+			return result;
+		}
+
+		StringBuilder sb = new StringBuilder();
+		sb.append("parkCode=").append(parkCode.trim()).append("&parkSecret=").append(park.getParkSecret())
+			.append("&timestamp=").append(timestamp.trim());
+
+		String sign = null;
+		try {
+			sign = EncryptUtil.encryptSHA(sb.toString());
+		} catch (IOException e) {
+			logger.error(e);
+
+			result.setCode("加密失败。");
+			return result;
+		}
+
+		if (!sign.equals(signature)) {
+			result.setCode("签名验证失败。");
+			return result;
+		}
+
+		result.setResult(true);
+		return result;
+	}
+
 	@Override
-	public BooleanResult record(String parkCode, String startTime, String endTime, String cardNo, String carNo,
-		String timestamp, String signature) {
+	public BooleanResult record(String parkCode, String timestamp, String signature, String startTime, String endTime,
+		String cardNo, String carNo) {
 		BooleanResult result = new BooleanResult();
 		result.setResult(false);
 
 		Record record = new Record();
 
 		if (StringUtils.isBlank(parkCode)) {
-			result.setCode("终端序列号不能为空。");
+			result.setCode("停车场编号不能为空。");
 			return result;
 		}
 
 		record.setParkCode(parkCode.trim());
+
+		result = validate(parkCode, timestamp, signature);
+		if (!result.getResult()) {
+			return result;
+		}
+
+		result.setResult(false);
 
 		if (StringUtils.isBlank(startTime)) {
 			result.setCode("停车开始时间不能为空。");
@@ -55,6 +123,7 @@ public class RecordServiceImpl implements IRecordService {
 
 		record.setCardNo(cardNo);
 		record.setCarNo(carNo);
+		record.setIp(context.getHttpServletRequest().getRemoteAddr());
 
 		record.setModifyUser(parkCode);
 
@@ -85,7 +154,7 @@ public class RecordServiceImpl implements IRecordService {
 	}
 
 	@Override
-	public BooleanResult record(String parkCode, String recordList, String timestamp, String signature) {
+	public BooleanResult record(String parkCode, String timestamp, String signature, String recordList) {
 		BooleanResult result = new BooleanResult();
 		result.setResult(false);
 
@@ -124,6 +193,22 @@ public class RecordServiceImpl implements IRecordService {
 
 		result.setCode("停车信息，成功同步 " + count + "；" + "失败 " + (records.size() - count) + "。");
 		return result;
+	}
+
+	public MessageContext getContext() {
+		return context;
+	}
+
+	public void setContext(MessageContext context) {
+		this.context = context;
+	}
+
+	public IParkService getParkService() {
+		return parkService;
+	}
+
+	public void setParkService(IParkService parkService) {
+		this.parkService = parkService;
 	}
 
 	public IRecordDao getRecordDao() {

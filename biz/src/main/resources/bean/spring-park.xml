@@ -5,11 +5,10 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 	
-	<bean id="recordService" class="com.papa2.platform.record.service.impl.RecordServiceImpl">
-		<property name="parkService" ref="parkService" />
-		<property name="recordDao" ref="recordDao" />
+	<bean id="parkService" class="com.papa2.platform.park.service.impl.ParkServiceImpl">
+		<property name="parkDao" ref="parkDao" />
 	</bean>
 	
-	<bean id="recordDao" class="com.papa2.platform.record.dao.impl.RecordDaoImpl" parent="baseDao" />
-	
+	<bean id="parkDao" class="com.papa2.platform.park.dao.impl.ParkDaoImpl" parent="baseDao" />
+
 </beans>

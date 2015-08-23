@@ -43,7 +43,7 @@
 			#parkCode#,
 			STR_TO_DATE(#startTime#, '%Y-%m-%d %T'),
 			STR_TO_DATE(#endTime#, '%Y-%m-%d %T'),
-			#parkCardId#,
+			#cardNo#,
 			#carNo#,
 			#ip#,
 			'U',
@@ -53,7 +53,7 @@
 			#modifyUser#
 		  )
 	]]>
-		<selectKey resultClass="java.lang.Long" keyProperty="parkId">
+		<selectKey resultClass="java.lang.Long" keyProperty="id">
 		<![CDATA[
 			SELECT LAST_INSERT_ID()
 		]]>
