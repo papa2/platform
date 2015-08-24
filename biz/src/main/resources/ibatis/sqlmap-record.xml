@@ -6,20 +6,30 @@
 	
 	<typeAlias alias="record" type="com.papa2.platform.api.record.bo.Record" />
 	
+	<select id="getRecordCount" parameterClass="record" resultClass="java.lang.Integer">
+	<![CDATA[
+		SELECT COUNT(1)
+		  FROM park.boss_tb_park_record t
+		 WHERE t.PARK_CODE = #parkCode#
+		   AND t.CARD_NO = #cardNo#
+		   AND t.CAR_NO = #carNo#
+		   AND t.STATE = 'U'
+	]]>
+	</select>
+	
 	<update id="updateRecord" parameterClass="record">
 	<![CDATA[
 		UPDATE park.boss_tb_park_record t
 		SET t.MODIFY_DATE  = NOW(),
 		  t.MODIFY_USER    = #modifyUser#,
+		  t.STATE		   = 'D',
 		  t.END_TIME       = STR_TO_DATE(#endTime#, '%Y-%m-%d %T')
 		WHERE t.PARK_CODE  = #parkCode#
-		AND t.START_TIME   = STR_TO_DATE(#startTime#, '%Y-%m-%d %T')
 		AND t.CARD_NO 	   = #cardNo#
 		AND t.CAR_NO       = #carNo#
 		AND t.STATE        = 'U'
 	]]>
 	</update>
-
 	
 	<insert id="createRecord" parameterClass="record">
 	<![CDATA[
@@ -28,7 +38,6 @@
 		  (
 			PARK_CODE,
 			START_TIME,
-			END_TIME,
 			CARD_NO,
 			CAR_NO,
 			IP,
@@ -42,7 +51,6 @@
 		  (
 			#parkCode#,
 			STR_TO_DATE(#startTime#, '%Y-%m-%d %T'),
-			STR_TO_DATE(#endTime#, '%Y-%m-%d %T'),
 			#cardNo#,
 			#carNo#,
 			#ip#,

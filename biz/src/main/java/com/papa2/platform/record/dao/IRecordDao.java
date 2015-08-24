@@ -11,6 +11,13 @@ public interface IRecordDao {
 	 * @param record
 	 * @return
 	 */
+	int getRecordCount(Record record);
+
+	/**
+	 * 
+	 * @param record
+	 * @return
+	 */
 	int updateRecord(Record record);
 
 	/**

@@ -108,12 +108,12 @@ public class RecordServiceImpl implements IRecordService {
 
 		result.setResult(false);
 
-		if (StringUtils.isBlank(startTime)) {
-			result.setCode("停车开始时间不能为空。");
+		if (StringUtils.isBlank(startTime) && StringUtils.isBlank(endTime)) {
+			result.setCode("停车开始时间和结束时间不能同时为空。");
 			return result;
 		}
 
-		record.setStartTime(startTime.trim());
+		record.setStartTime(startTime);
 		record.setEndTime(endTime);
 
 		if (StringUtils.isBlank(cardNo) && StringUtils.isBlank(carNo)) {
@@ -127,27 +127,39 @@ public class RecordServiceImpl implements IRecordService {
 
 		record.setModifyUser(parkCode);
 
-		try {
-			int count = recordDao.updateRecord(record);
-			if (count > 0) {
-				result.setCode("更新停车信息成功。");
-				result.setResult(true);
+		if (StringUtils.isNotBlank(startTime)) {
+			int count = getRecordCount(record);
+			if (count != 0) {
+				result.setCode("停车记录已存在。");
 				return result;
 			}
-		} catch (Exception e) {
-			logger.error(LogUtil.parserBean(record), e);
 
-			result.setCode("更新停车信息失败。");
+			try {
+				result.setCode(String.valueOf(recordDao.createRecord(record)));
+				result.setResult(true);
+			} catch (Exception e) {
+				logger.error(LogUtil.parserBean(record), e);
+
+				result.setCode("记录停车信息失败。");
+			}
+
 			return result;
 		}
 
-		try {
-			result.setCode(String.valueOf(recordDao.createRecord(record)));
-			result.setResult(true);
-		} catch (Exception e) {
-			logger.error(LogUtil.parserBean(record), e);
+		if (StringUtils.isNotBlank(endTime)) {
+			try {
+				int count = recordDao.updateRecord(record);
+				if (count > 0) {
+					result.setCode("更新停车信息成功。");
+					result.setResult(true);
+				}
+			} catch (Exception e) {
+				logger.error(LogUtil.parserBean(record), e);
 
-			result.setCode("记录停车信息失败。");
+				result.setCode("更新停车信息失败。");
+			}
+
+			return result;
 		}
 
 		return result;
@@ -193,6 +205,16 @@ public class RecordServiceImpl implements IRecordService {
 
 		result.setCode("停车信息，成功同步 " + count + "；" + "失败 " + (records.size() - count) + "。");
 		return result;
+	}
+
+	private int getRecordCount(Record record) {
+		try {
+			return recordDao.getRecordCount(record);
+		} catch (Exception e) {
+			logger.error(LogUtil.parserBean(record), e);
+		}
+
+		return -1;
 	}
 
 	public MessageContext getContext() {

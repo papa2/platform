@@ -18,6 +18,11 @@ import com.papa2.platform.record.dao.IRecordDao;
 public class RecordDaoImpl extends BaseDaoImpl implements IRecordDao {
 
 	@Override
+	public int getRecordCount(Record record) {
+		return (Integer) getSqlMapClientTemplate().queryForObject("record.getRecordCount", record);
+	}
+
+	@Override
 	public int updateRecord(Record record) {
 		return getSqlMapClientTemplate().update("record.updateRecord", record);
 	}
