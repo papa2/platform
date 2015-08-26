@@ -13,7 +13,7 @@
 		 WHERE t.PARK_CODE = #parkCode#
 		   AND t.CARD_NO = #cardNo#
 		   AND t.CAR_NO = #carNo#
-		   AND t.STATE = 'U'
+		   AND t.START_TIME = STR_TO_DATE(#startTime#, '%Y-%m-%d %T')
 	]]>
 	</select>
 	
