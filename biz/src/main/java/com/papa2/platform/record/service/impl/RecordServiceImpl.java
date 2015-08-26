@@ -196,8 +196,8 @@ public class RecordServiceImpl implements IRecordService {
 		int count = 0;
 		for (Record record : records) {
 			res =
-				record(parkCode, record.getStartTime(), record.getEndTime(), record.getCardNo(), record.getCarNo(),
-					timestamp, signature);
+				record(parkCode, timestamp, signature, record.getStartTime(), record.getEndTime(), record.getCardNo(),
+					record.getCarNo());
 			if (res.getResult()) {
 				count++;
 			}
