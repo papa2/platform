@@ -35,7 +35,7 @@ public class RecordAction extends BaseAction {
 		Record record = new Record();
 		record.setStart(0);
 		record.setLimit(30);
-		record.setSort("ID");
+		record.setSort("MODIFY_DATE");
 		record.setDir("DESC");
 
 		count = recordService.getRecordCount(record);
