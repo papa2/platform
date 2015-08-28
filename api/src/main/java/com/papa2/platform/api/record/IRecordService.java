@@ -1,5 +1,7 @@
 package com.papa2.platform.api.record;
 
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
@@ -7,6 +9,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import com.papa2.platform.api.record.bo.Record;
 import com.papa2.platform.framework.bo.BooleanResult;
 
 /**
@@ -49,5 +52,19 @@ public interface IRecordService {
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	BooleanResult record(@FormParam("parkCode") String parkCode, @FormParam("timestamp") String timestamp,
 		@FormParam("signature") String signature, @FormParam("recordList") String recordList);
+
+	/**
+	 * 
+	 * @param record
+	 * @return
+	 */
+	int getRecordCount(Record record);
+
+	/**
+	 * 
+	 * @param record
+	 * @return
+	 */
+	List<Record> getRecordList(Record record);
 
 }

@@ -128,7 +128,8 @@ public class RecordServiceImpl implements IRecordService {
 		record.setModifyUser(parkCode);
 
 		if (StringUtils.isNotBlank(startTime)) {
-			int count = getRecordCount(record);
+			int count =
+				getRecordCount(record.getParkCode(), record.getCardNo(), record.getCarNo(), record.getStartTime());
 			if (count != 0) {
 				result.setCode("停车记录已存在。");
 				return result;
@@ -207,14 +208,44 @@ public class RecordServiceImpl implements IRecordService {
 		return result;
 	}
 
-	private int getRecordCount(Record record) {
+	private int getRecordCount(String parkCode, String cardNo, String carNo, String startTime) {
+		try {
+			return recordDao.getRecordCount(parkCode, cardNo, carNo, startTime);
+		} catch (Exception e) {
+			logger.error(e);
+		}
+
+		return -1;
+	}
+
+	@Override
+	public int getRecordCount(Record record) {
+		if (record == null) {
+			return 0;
+		}
+
 		try {
 			return recordDao.getRecordCount(record);
 		} catch (Exception e) {
 			logger.error(LogUtil.parserBean(record), e);
 		}
 
-		return -1;
+		return 0;
+	}
+
+	@Override
+	public List<Record> getRecordList(Record record) {
+		if (record == null) {
+			return null;
+		}
+
+		try {
+			return recordDao.getRecordList(record);
+		} catch (Exception e) {
+			logger.error(LogUtil.parserBean(record), e);
+		}
+
+		return null;
 	}
 
 	public MessageContext getContext() {

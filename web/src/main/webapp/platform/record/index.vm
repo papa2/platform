@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+		<title></title>
+		#ICON()
+        #CSSM(["font-awesome", "bootstrap"])
+		<style>
+		body { padding-top: 70px; padding-bottom: 70px; }
+		</style>
+		#UA()
+	</head>
+	<body>
+		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+			<div class="navbar-brand">
+				<i class="fa fa-hand-peace-o"></i> 已收集 $!{count} 数据
+			</div>
+			<div class="navbar-brand pull-right">
+				<a href=""><i class="fa fa-refresh"></i></a>
+			</div>
+        </nav>
+		
+		<ul class="list-group">
+			#foreach($record in $recordList)
+			<li class="list-group-item list-group-item-info">
+				<i class="fa fa-car"></i> $!{record.carNo}
+				<div style="font-size: 12px;">
+    				<i class="fa fa-sign-in"></i> $!{record.startTime}
+    				#if($!{record.endTime})
+    				<i class="fa fa-sign-out" style="margin-left: 10px;"></i> $!{record.endTime}
+					#end
+                </div>
+            </li>
+			#end
+        </ul>
+		
+		<footer class="navbar navbar-fixed-bottom text-center">
+        	<p>&copy; 2015 papa2-inc.com 版权所有</p>
+        </footer>
+    </body>
+</html>

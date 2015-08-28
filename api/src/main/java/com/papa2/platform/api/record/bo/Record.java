@@ -1,12 +1,16 @@
 package com.papa2.platform.api.record.bo;
 
+import com.papa2.platform.framework.bo.SearchInfo;
+
 /**
  * 停车记录.
  * 
  * @author xujiakun
  * 
  */
-public class Record {
+public class Record extends SearchInfo {
+
+	private static final long serialVersionUID = 5810036235970390092L;
 
 	private Long id;
 

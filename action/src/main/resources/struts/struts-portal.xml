@@ -7,7 +7,7 @@
 
 		<!-- 登陆首页 -->
 		<action name="index" class="portalAction" method="index">
-			<result name="success">/client/portal/index.vm</result>
+			<result name="success">/platform/portal/index.vm</result>
 		</action>
 		
 	</package>

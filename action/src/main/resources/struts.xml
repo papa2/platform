@@ -6,4 +6,5 @@
 	<include file="struts/struts-framework.xml" />
 	<include file="struts/struts-error.xml" />
 	<include file="struts/struts-portal.xml" />
+	<include file="struts/struts-record.xml" />
 </struts>

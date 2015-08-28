@@ -1,7 +1,9 @@
 package com.papa2.platform.record.dao.impl;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.orm.ibatis.SqlMapClientCallback;
 
@@ -18,8 +20,24 @@ import com.papa2.platform.record.dao.IRecordDao;
 public class RecordDaoImpl extends BaseDaoImpl implements IRecordDao {
 
 	@Override
+	public int getRecordCount(String parkCode, String cardNo, String carNo, String startTime) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("parkCode", parkCode);
+		map.put("cardNo", cardNo);
+		map.put("carNo", carNo);
+		map.put("startTime", startTime);
+		return (Integer) getSqlMapClientTemplate().queryForObject("record.getRecordCount1", map);
+	}
+
+	@Override
 	public int getRecordCount(Record record) {
-		return (Integer) getSqlMapClientTemplate().queryForObject("record.getRecordCount", record);
+		return (Integer) getSqlMapClientTemplate().queryForObject("record.getRecordCount2", record);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Record> getRecordList(Record record) {
+		return getSqlMapClientTemplate().queryForList("record.getRecordList", record);
 	}
 
 	@Override

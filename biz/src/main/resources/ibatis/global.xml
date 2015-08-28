@@ -6,11 +6,11 @@
 <sqlMap namespace="global">
 
 	<sql id="paginationStart">
-	<![CDATA[ select * from (select row_.*, rownum rownum_ from ( ]]>
+	<![CDATA[ ]]>
 	</sql>
-
+	
 	<sql id="paginationEnd">
-	<![CDATA[ ) row_ where rownum < #end#) where rownum_ >= #start# ]]>
+	<![CDATA[ limit #start#, #limit# ]]>
 	</sql>
 
 	<sql id="orderBy">

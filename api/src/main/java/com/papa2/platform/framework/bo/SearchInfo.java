@@ -71,11 +71,7 @@ public class SearchInfo implements Serializable {
 	}
 
 	public void setStart(int start) {
-		this.start = start + 1;
-	}
-
-	public int getEnd() {
-		return this.start + limit;
+		this.start = start;
 	}
 
 	public String getDir() {

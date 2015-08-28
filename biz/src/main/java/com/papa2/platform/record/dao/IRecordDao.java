@@ -8,10 +8,27 @@ public interface IRecordDao {
 
 	/**
 	 * 
+	 * @param parkCode
+	 * @param cardNo
+	 * @param carNo
+	 * @param startTime
+	 * @return
+	 */
+	int getRecordCount(String parkCode, String cardNo, String carNo, String startTime);
+
+	/**
+	 * 
 	 * @param record
 	 * @return
 	 */
 	int getRecordCount(Record record);
+
+	/**
+	 * 
+	 * @param record
+	 * @return
+	 */
+	List<Record> getRecordList(Record record);
 
 	/**
 	 * 
