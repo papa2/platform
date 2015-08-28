@@ -22,6 +22,11 @@ public class RecordAction extends BaseAction {
 	private List<Record> recordList;
 
 	/**
+	 * 已占用车位.
+	 */
+	private int occupy;
+
+	/**
 	 * 登录首页.
 	 * 
 	 * @return
@@ -38,6 +43,9 @@ public class RecordAction extends BaseAction {
 		if (count > 0) {
 			recordList = recordService.getRecordList(record);
 		}
+
+		record.setState("U");
+		occupy = recordService.getRecordCount(record);
 
 		return SUCCESS;
 	}
@@ -64,6 +72,14 @@ public class RecordAction extends BaseAction {
 
 	public void setRecordList(List<Record> recordList) {
 		this.recordList = recordList;
+	}
+
+	public int getOccupy() {
+		return occupy;
+	}
+
+	public void setOccupy(int occupy) {
+		this.occupy = occupy;
 	}
 
 }

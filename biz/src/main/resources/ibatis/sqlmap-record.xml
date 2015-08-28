@@ -21,6 +21,11 @@
 	<![CDATA[
 		SELECT COUNT(1) FROM park.boss_tb_park_record t
 	]]>
+		<dynamic prepend="where">
+			<isNotEmpty property="state" prepend="and">
+			<![CDATA[ t.state = #state# ]]>
+			</isNotEmpty>
+		</dynamic>
 	</select>
 	
 	<select id="getRecordList" parameterClass="record" resultClass="record">

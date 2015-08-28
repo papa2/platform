@@ -38,6 +38,8 @@ public class Record extends SearchInfo {
 
 	private String ip;
 
+	private String state;
+
 	private String modifyUser;
 
 	// >>>>>>>>>>以下是辅助属性<<<<<<<<<<
@@ -96,6 +98,14 @@ public class Record extends SearchInfo {
 
 	public void setIp(String ip) {
 		this.ip = ip;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
 	}
 
 	public String getModifyUser() {
