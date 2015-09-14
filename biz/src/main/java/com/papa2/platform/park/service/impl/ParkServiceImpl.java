@@ -1,5 +1,7 @@
 package com.papa2.platform.park.service.impl;
 
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 
 import com.papa2.platform.api.park.IParkService;
@@ -33,6 +35,17 @@ public class ParkServiceImpl implements IParkService {
 			return parkDao.getPark(park);
 		} catch (Exception e) {
 			logger.error(LogUtil.parserBean(park), e);
+		}
+
+		return null;
+	}
+
+	@Override
+	public List<Park> getParkStats() {
+		try {
+			return parkDao.getParkStats();
+		} catch (Exception e) {
+			logger.error(e);
 		}
 
 		return null;

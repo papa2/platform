@@ -6,6 +6,7 @@
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 	
 	<bean id="recordAction" class="com.papa2.platform.record.action.RecordAction" parent="baseAction" scope="request">
+		<property name="parkService" ref="parkService" />
 		<property name="recordService" ref="recordService" />
 	</bean>
 	

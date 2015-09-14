@@ -17,4 +17,22 @@
 	]]>
 	</select>
 	
+	<select id="getParkStats" resultClass="park">
+	<![CDATA[
+		SELECT aaa.park_id AS parkId,
+			   aaa.park_code AS parkCode,
+			   aaa.park_name AS parkName,
+			   aaa.address,
+			   aaa.lon,
+			   aaa.lat,
+			   IFNULL(bbb.occupy, 0) AS occupy
+		  FROM park.boss_tb_park aaa LEFT JOIN(
+		SELECT p.park_code, COUNT(1) AS occupy
+		  FROM park.boss_tb_park_record p
+		 WHERE p.state = 'U'
+		 GROUP BY p.park_code) bbb ON aaa.park_code = bbb.park_code
+		 WHERE aaa.state = 'U'
+	]]>
+	</select>
+	
 </sqlMap>

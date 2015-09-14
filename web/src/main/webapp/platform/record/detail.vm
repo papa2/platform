@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+		<title></title>
+		#ICON()
+        #CSSM(["font-awesome", "bootstrap"])
+		<style>
+		body { padding-top: 70px; padding-bottom: 70px; }
+		</style>
+		#UA()
+	</head>
+	<body>
+		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+			<a class="navbar-brand glyphicon glyphicon-chevron-left" href="javascript:back();"></a>
+			<div class="navbar-brand">
+				<span style="font-size: 80%;">基于<strong>$!{count}</strong>条数据分析</span>
+			</div>
+			<div class="navbar-brand pull-right">
+				<a href=""><i class="fa fa-refresh"></i></a>
+			</div>
+        </nav>
+		
+		<ul class="list-group" style="margin-top: -20px;">
+			#foreach($record in $recordList)
+			<li class="list-group-item list-group-item-info">
+				#if($!stringUtil.isBlank($!{record.carNo}))
+				<i class="fa fa-credit-card"></i> $!{record.cardNo}
+				#else
+				<i class="fa fa-car"></i> $!{record.carNo}
+				#end
+				<div style="font-size: 12px;">
+    				<i class="fa fa-sign-in"></i> $!{record.startTime}
+    				#if($!{record.endTime})
+    				<i class="fa fa-sign-out" style="margin-left: 10px;"></i> $!{record.endTime}
+					#end
+                </div>
+            </li>
+			#end
+        </ul>
+		
+		#parse("/platform/framework/footer.vm")
+		
+		#JSM(["jquery", "spin"])
+		#JS_ENV_VAL()
+		<script type="text/javascript" src="$!{env.imgUrl}/js/record/detail.js"></script>
+    </body>
+</html>

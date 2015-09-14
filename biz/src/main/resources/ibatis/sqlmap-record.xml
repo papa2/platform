@@ -25,6 +25,9 @@
 			<isNotEmpty property="state" prepend="and">
 			<![CDATA[ t.state = #state# ]]>
 			</isNotEmpty>
+			<isNotEmpty property="parkCode" prepend="and">
+			<![CDATA[ t.park_code = #parkCode# ]]>
+			</isNotEmpty>
 		</dynamic>
 	</select>
 	
@@ -38,6 +41,11 @@
 			   t.car_no AS carNo
 		  FROM park.boss_tb_park_record t
 	]]>
+		<dynamic prepend="where">
+			<isNotEmpty property="parkCode" prepend="and">
+			<![CDATA[ t.park_code = #parkCode# ]]>
+			</isNotEmpty>
+		</dynamic>
 		<include refid="global.orderBy" />
 		<include refid="global.paginationEnd" />
 	</select>

@@ -8,6 +8,18 @@ public class Park {
 
 	private String parkSecret;
 
+	private String parkName;
+
+	private String address;
+
+	private double lon;
+
+	private double lat;
+
+	// >>>>>>>>>>以下是辅助属性<<<<<<<<<<
+
+	private int occupy;
+
 	public Long getParkId() {
 		return parkId;
 	}
@@ -30,6 +42,46 @@ public class Park {
 
 	public void setParkSecret(String parkSecret) {
 		this.parkSecret = parkSecret;
+	}
+
+	public String getParkName() {
+		return parkName;
+	}
+
+	public void setParkName(String parkName) {
+		this.parkName = parkName;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public double getLon() {
+		return lon;
+	}
+
+	public void setLon(double lon) {
+		this.lon = lon;
+	}
+
+	public double getLat() {
+		return lat;
+	}
+
+	public void setLat(double lat) {
+		this.lat = lat;
+	}
+
+	public int getOccupy() {
+		return occupy;
+	}
+
+	public void setOccupy(int occupy) {
+		this.occupy = occupy;
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.papa2.platform.park.dao;
 
+import java.util.List;
+
 import com.papa2.platform.api.park.bo.Park;
 
 /**
@@ -15,5 +17,11 @@ public interface IParkDao {
 	 * @return
 	 */
 	Park getPark(Park park);
+
+	/**
+	 * 
+	 * @return
+	 */
+	List<Park> getParkStats();
 
 }

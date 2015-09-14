@@ -10,5 +10,9 @@
 			<result name="success">/platform/record/index.vm</result>
 		</action>
 		
+		<action name="detail" class="recordAction" method="detail">
+			<result name="success">/platform/record/detail.vm</result>
+		</action>
+		
 	</package>
 </struts>
