@@ -21,6 +21,6 @@
 		<script type="text/javascript">
 		var parkList = '$!{parkList}';
         </script>
-		<script type="text/javascript" src="$!{env.imgUrl}/js/record/index.js?t=20150915"></script>
+		<script type="text/javascript" src="$!{env.imgUrl}/js/record/index.js?t=20151021"></script>
     </body>
 </html>

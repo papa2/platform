@@ -41,11 +41,11 @@ function init() {
 	for (var i = 0; i < data_info.length; i++) {
 		var marker = new BMap.Marker(new BMap.Point(data_info[i].lon,
 				data_info[i].lat)); // 创建标注
-		var content = "<div><strong>地址："
-				+ data_info[i].address
-				+ "</strong><div style='margin: 3px 0 3px 0;'>共有车位：500</div><div>已占车位："
+		var content = "<div><strong>地址：" + data_info[i].address
+				+ "</strong><div style='margin: 3px 0 3px 0;'>已占用车位："
 				+ "<a href='javascript:detail(" + data_info[i].parkCode
-				+ ");'>" + data_info[i].occupy + "</a></div></div>";
+				+ ");'>" + data_info[i].occupy + "</a></div><div>可预约车位："
+				+ (600 - data_info[i].occupy) + "</div></div>";
 		map.addOverlay(marker); // 将标注添加到地图中
 		addClickHandler(data_info[i].parkName, content, marker);
 	}
